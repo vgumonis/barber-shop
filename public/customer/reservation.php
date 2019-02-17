@@ -20,5 +20,12 @@
         <br><br>
         <input type="submit" value="Submit">
     </form>
+    <br>
+    <form action="/customer/reservation/existing" method="POST">
+        Code:<br>
+        <input type="text" name="code">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>

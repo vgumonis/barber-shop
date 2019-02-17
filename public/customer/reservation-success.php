@@ -1,5 +1,3 @@
-<?php $reservation = $params['reservation']; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +5,18 @@
     <title>Title</title>
 </head>
 <body>
-success
+<?php
+if (isset($params['message'])) {
+    echo $params['message'];
+}
+?>
 
-<?php echo 'Your reservation at : ' . $reservation['datetime'] . ' .Your request number is : ' . $reservation['code']; ?>
+<?php if (isset($params['reservation'])) {
+    $reservation = $params['reservation'];
+    echo 'Your reservation at : ' . $reservation['datetime'] . ' .Your request number is : ' . $reservation['code'];
+}
+
+?>
 
 </body>
 </html>

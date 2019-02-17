@@ -54,4 +54,25 @@ class Reservation extends BaseDBRepository
         return $reservation->fromArray($result[0]);
 
     }
+
+    public function findActiveReservationByCode($code)
+    {
+        $query = $this->pdo->prepare(
+            "Select * from barber.reservation where code = :code and status = :status"
+        );
+
+        $query->execute(['code' => $code, ':status' => ReservationStatus::RESERVATION_STATUS_ACTIVE]);
+
+        $result = $query->fetchAll();
+
+        if (count($result) == 0) {
+            return null;
+        }
+
+        $reservation = new ReservationModel();
+
+        return $reservation->fromArray($result[0]);
+    }
+
+
 }

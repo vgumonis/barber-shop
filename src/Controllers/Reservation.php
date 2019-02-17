@@ -54,13 +54,44 @@ class Reservation extends BaseController
         $this->addSuccessReservationCookie($newReservation);
 
         $this->view('public/customer/reservation-success.php', [
-            'customer' => $customer->toArray(),
-            'reservation' => $newReservation->toArray()
+            'reservation' => $newReservation->toArray(),
+            'message' => 'You successfully registered!!!!'
         ]);
+    }
+
+    public function getExistingCustomersReservations(array $params)
+    {
+        $this->findActiveReservationByCode($params['code']);
+    }
+
+    public function loadCustomerReservationView()
+    {
+        if(isset($_COOKIE['reservation-cookie'])) {
+            $this->findActiveReservationByCode($_COOKIE['reservation-cookie']);
+            return;
+        }
+
+        $this->view('public/customer/reservation.php');
     }
 
     private function addSuccessReservationCookie(ReservationModel $reservation)
     {
         setcookie("reservation-cookie", $reservation->getCode(), time() + 3600);
     }
+
+    private function findActiveReservationByCode(string $code)
+    {
+        $activeReservation = $this->reservationRepository->findActiveReservationByCode($code);
+
+        if ($activeReservation !== null) {
+            $this->view('public/customer/reservation-success.php', [
+                'reservation' => $activeReservation->toArray()
+            ]);
+
+            return;
+        }
+
+        $this->view('public/customer/reservation.php', ['message' => 'No reservation found']);
+    }
+
 }

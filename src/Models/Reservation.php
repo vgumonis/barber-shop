@@ -99,7 +99,7 @@ class Reservation
     }
 
 
-    public function fromArray(array $array)
+    public function fromArray(array $array) : Reservation
     {
         $this->setId($array['id']);
         $this->setUserId($array['user_id']);
