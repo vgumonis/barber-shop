@@ -6,7 +6,7 @@ $reservationController = new \App\Controllers\Reservation();
 
 switch ($_SERVER['REQUEST_URI']) {
     case '/customer/reservation' :
-        include ('public/customer/reservation.html');
+        include('public/customer/reservation.php');
         break;
     case '/customer/reservation/create' :
         $reservationController->addReservation($_POST);

@@ -5,6 +5,11 @@
     <title>customer</title>
 </head>
 <body>
+<?php
+    if (isset($params['message'])) {
+        echo $params['message'];
+    }
+?>
     <form action="/customer/reservation/create" method="POST">
         First name:<br>
         <input type="text" name="first_name">

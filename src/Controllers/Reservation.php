@@ -36,15 +36,31 @@ class Reservation extends BaseController
 
         if ($existing == null) {
             $existing = $this->customerRepository->create($customer);
+        } else {
+            $activeReservation = $this->reservationRepository->findActiveReservationByCustomerId($existing->getId());
+            if ($activeReservation !== null) {
+                $this->view('public/customer/reservation.php', [
+                    'message' => 'You already have a reservation' // show date and code
+                ]);
+
+                return;
+            }
         }
 
         $reservation->setUserId($existing->getId());
 
         $newReservation = $this->reservationRepository->create($reservation);
 
+        $this->addSuccessReservationCookie($newReservation);
+
         $this->view('public/customer/reservation-success.php', [
             'customer' => $customer->toArray(),
             'reservation' => $newReservation->toArray()
         ]);
+    }
+
+    private function addSuccessReservationCookie(ReservationModel $reservation)
+    {
+        setcookie("reservation-cookie", $reservation->getCode(), time() + 3600);
     }
 }

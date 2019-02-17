@@ -34,4 +34,24 @@ class Reservation extends BaseDBRepository
 
         return $reservation;
     }
+
+    public function findActiveReservationByCustomerId($id)
+    {
+        $query = $this->pdo->prepare(
+            "Select * from barber.reservation where user_id = :userId and status = :status"
+        );
+
+        $query->execute(['userId' => $id, ':status' => ReservationStatus::RESERVATION_STATUS_ACTIVE]);
+
+        $result = $query->fetchAll();
+
+        if (count($result) == 0) {
+            return null;
+        }
+
+        $reservation = new ReservationModel();
+
+        return $reservation->fromArray($result[0]);
+
+    }
 }

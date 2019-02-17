@@ -81,7 +81,7 @@ class Customer
         $this->timesVisited = $timesVisited;
     }
 
-    public function fromArray(array $array)
+    public function fromArray(array $array) : Customer
     {
         $this->setId($array['id']);
         $this->setFirstName($array['first_name']);
