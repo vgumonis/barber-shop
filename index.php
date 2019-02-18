@@ -10,17 +10,37 @@ switch ($_SERVER['REQUEST_URI']) {
         $reservationController->loadCustomerReservationView();
         break;
     case '/customer/reservation/create' :
-        $reservationController->addReservation($_POST);
+        $reservationController->addReservationByCustomer($_POST);
         break;
     case '/customer/reservation/existing' :
         $reservationController->getExistingCustomersReservations($_POST);
         break;
-
     case '/customer/reservation/cancel' :
         $reservationController->cancelReservation($_POST);
         break;
-    case '/barber/reservations' :
+    case '/barber/reservation' :
         $reservationController->loadReservationsListView();
+        break;
+    case '/barber/reservation/change-status' :
+        $reservationController->changeStatus($_POST);
+        break;
+    case   '/barber/reservation/get-by-date?query=today':
+        $reservationController->getReservationsByDay($_GET);
+        break;
+    case '/barber/reservation/get-by-date?query=tomorrow':
+        $reservationController->getReservationsByDay($_GET);
+        break;
+    case '/barber/reservation/get-by-date' :
+        $reservationController->getReservationsByDay($_POST);
+        break;
+    case '/barber/reservation/create' :
+        $reservationController->addReservationByBarber($_POST);
+        break;
+    case  '/barber/reservation/search-by-name' :
+        $reservationController->getExistingCustomersReservations($_POST);
+        break;
+    case '/barber/reservation/get-by-loyalty?loyalty=max':
+        $reservationController->finReservationsByLoyalty();
         break;
     case '/barber/complain-form?':
         $complainController->getForm();

@@ -100,11 +100,108 @@ class Reservation extends BaseDBRepository
 
     }
 
-    public function updateStatus($id,$status)
+    public function updateStatus($id, $status)
     {
-        $query = $this->pdo->prepare("UPDATE barber.reservation SET status = :status WHERE id = :id");
-        $query->execute(['status' => $status, 'id' => $id]);
+        if ($status === ReservationStatus::RESERVATION_STATUS_FINISHED) {
+            $this->pdo->beginTransaction();
+
+            try {
+                $query = $this->pdo->prepare("UPDATE reservation SET status = :status  WHERE id = :id");
+                $query->execute(['status' => $status, 'id' => $id]);
+
+                $query = $this->pdo->prepare("SELECT user_id FROM reservation WHERE id = :id");
+                $query->execute(['id' => $id]);
+                $result = $query->fetch();
+
+                $query = $this->pdo->prepare("UPDATE customer SET times_visited = times_visited + 1 WHERE id = :id");
+                $query->execute(['id' => $result['user_id']]);
+
+            } catch (\Throwable $e) {
+                $this->pdo->rollBack();
+            }
+            $this->pdo->commit();
+
+        } else {
+            $query = $this->pdo->prepare("UPDATE reservation SET status = :status WHERE id = :id");
+            $query->execute(['status' => $status, 'id' => $id]);
+        }
     }
 
+    public function getReservationsByDate($day)
+    {
 
+        $query = $this->pdo->prepare("Select reservation.*,
+                           customer.id as customer_id,
+                           customer.first_name,
+                           customer.last_name,
+                           customer.times_visited
+                      from barber.reservation
+                      inner join barber.customer on reservation.user_id = customer.id WHERE cast(datetime as Date) = :date "
+        );
+
+        switch ($day) {
+            case 'today':
+                $date = date("Y-m-d");
+                break;
+            case 'tomorrow':
+                $date = date("Y-m-d", strtotime("+1 day"));
+                break;
+            default:
+                $date = $day;
+        }
+
+        $query->execute([':date' => $date]);
+        $results = $query->fetchAll();
+
+        if (count($results) == 0) {
+            return null;
+        }
+
+        $customerReservation = new CustomerReservation();
+        return $customerReservation->fromMultipleArrays($results);
+    }
+
+    public function findReservationsByName($firstName, $lastName)
+    {
+        $query = $this->pdo->prepare("Select reservation.*,
+                           customer.id as customer_id,
+                           customer.first_name,
+                           customer.last_name,
+                           customer.times_visited
+                      from barber.reservation
+                      inner join barber.customer on reservation.user_id = customer.id WHERE  first_name = :firstName and last_name = :lastName"
+        );
+
+        $query->execute([':firstName' => $firstName, ':lastName' => $lastName]);
+        $results = $query->fetchAll();
+
+        if (count($results) == 0) {
+            return null;
+        }
+
+        $customerReservation = new CustomerReservation();
+        return $customerReservation->fromMultipleArrays($results);
+    }
+
+    public function findReservationsByLoyalty()
+    {
+        $query = $this->pdo->prepare("Select reservation.*,
+                           customer.id as customer_id,
+                           customer.first_name,
+                           customer.last_name,
+                           customer.times_visited
+                      from barber.reservation
+                      inner join barber.customer on reservation.user_id = customer.id ORDER BY times_visited DESC"
+        );
+
+        $query->execute();
+        $results = $query->fetchAll();
+
+        if (count($results) == 0) {
+            return null;
+        }
+
+        $customerReservation = new CustomerReservation();
+        return $customerReservation->fromMultipleArrays($results);
+    }
 }

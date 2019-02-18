@@ -14,15 +14,12 @@ class ComplainRepository extends BaseDBRepository
 {
 
     public function create(ComplainModel $complain)
-    {   echo "repo";
-        var_dump($complain);
+    {
         $query = $this->pdo->prepare("Insert into barber.complain (complaint, solution, date) values (:complaint, :solution , NOW())");
         $query->execute([
             ':complaint' => $complain->getComplaint(),
             ':solution' => $complain->getSolution(),
         ]);
-
-        ///$complain->setId($this->pdo->lastInsertId());
 
     }
 

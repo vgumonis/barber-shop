@@ -25,7 +25,7 @@ class Reservation extends BaseController
         $this->customerRepository = new CustomerRepository();
     }
 
-    public function addReservation(array $params)
+    public function addReservationByCustomer(array $params)
     {
         $customer = new Customer();
         $customer->fromArray($params);
@@ -60,14 +60,50 @@ class Reservation extends BaseController
         ]);
     }
 
+
+    public function addReservationByBarber(array $params)
+    {
+        $customer = new Customer();
+        $customer->fromArray($params);
+
+        $reservation = new ReservationModel();
+        $reservation->fromArray($params);
+
+        $existing = $this->customerRepository->findByName($customer);
+
+        if ($existing == null) {
+            $existing = $this->customerRepository->create($customer);
+        } else {
+            $activeReservation = $this->reservationRepository->findActiveReservationByCustomerId($existing->getId());
+            if ($activeReservation !== null) {
+
+                $this->loadReservationsListView("Client already has a reservation on " . $activeReservation->getDateTime());
+                return;
+            }
+        }
+        $reservation->setUserId($existing->getId());
+        $newReservation = $this->reservationRepository->create($reservation);
+
+//        $this->view('public/barber/reservation-list.php', [
+//            'reservation' => $newReservation->toArray(),
+//            'message' => 'Reservation successfully added!'
+//        ]);
+        $this->loadReservationsListView('Reservation successfully added!');
+
+    }
+
     public function getExistingCustomersReservations(array $params)
     {
-        $this->findActiveReservationByCode($params['code']);
+        if (isset($params['code'])) {
+            $this->findActiveReservationByCode($params['code']);
+        } else {
+            $this->findReservationsByName($params['first_name'], $params['last_name']);
+        }
     }
 
     public function loadCustomerReservationView()
     {
-        if(isset($_COOKIE['reservation-cookie'])) {
+        if (isset($_COOKIE['reservation-cookie'])) {
             $this->findActiveReservationByCode($_COOKIE['reservation-cookie']);
             return;
         }
@@ -75,10 +111,10 @@ class Reservation extends BaseController
         $this->view('public/customer/reservation.php');
     }
 
-    public function loadReservationsListView()
+    public function loadReservationsListView($message = null)
     {
         $reservations = $this->reservationRepository->getAllReservations();
-        $this->view('public/barber/reservations-list.php', ['reservations' => $reservations]);
+        $this->view('public/barber/reservations-list.php', ['reservations' => $reservations, 'message' => $message]);
     }
 
     public function cancelReservation(array $params)
@@ -88,9 +124,31 @@ class Reservation extends BaseController
         $this->view('public/customer/reservation.php', ['message' => 'Reservation canceled']);
     }
 
+    public function changeStatus(array $params)
+    {
+        $this->reservationRepository->updateStatus($params['id'], $params['status']);
+        $this->loadReservationsListView("Reservation status updated!");
+
+    }
+
+    public function getReservationsByDay(array $params)
+    {
+        $reservations = $this->reservationRepository->getReservationsByDate($params['date']);
+        $this->view('public/barber/reservations-list.php',
+            ['reservations' => $reservations, 'message' => "Reservations found for " . $params['date']]);
+    }
+
+    public function finReservationsByLoyalty()
+    {
+
+        $reservations = $this->reservationRepository->findReservationsByLoyalty();
+        $this->view('public/barber/reservations-list.php',
+            ['reservations' => $reservations, 'message' => "Sorted by loyalty"]);
+    }
+
     private function cancelReservationCookie()
     {
-        setcookie ("reservation-cookie", "", time()-3600);
+        setcookie("reservation-cookie", "", time() - 3600);
     }
 
     private function addSuccessReservationCookie(ReservationModel $reservation)
@@ -106,13 +164,18 @@ class Reservation extends BaseController
             $this->view('public/customer/reservation-success.php', [
                 'reservation' => $activeReservation->toArray()
             ]);
-
             return;
         }
-
         $this->view('public/customer/reservation.php', ['message' => 'No reservation found']);
     }
 
+    private function findReservationsByName($firstName, $lastName)
+    {
+        $reservations = $this->reservationRepository->findReservationsByName($firstName, $lastName);
+        $this->view('public/barber/reservations-list.php',
+            ['reservations' => $reservations, 'message' => "Reservations found for " . $firstName . " " . $lastName]);
+    }
 
 
 }
+
