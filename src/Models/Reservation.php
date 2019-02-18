@@ -29,7 +29,7 @@ class Reservation
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -45,7 +45,7 @@ class Reservation
     /**
      * @param mixed $userId
      */
-    public function setUserId($userId): void
+    public function setUserId($userId)
     {
         $this->userId = $userId;
     }
@@ -61,7 +61,7 @@ class Reservation
     /**
      * @param mixed $dateTime
      */
-    public function setDateTime($dateTime): void
+    public function setDateTime($dateTime)
     {
         $this->dateTime = $dateTime;
     }
@@ -77,7 +77,7 @@ class Reservation
     /**
      * @param mixed $status
      */
-    public function setStatus($status): void
+    public function setStatus($status)
     {
         $this->status = $status;
     }
@@ -93,7 +93,7 @@ class Reservation
     /**
      * @param mixed $code
      */
-    public function setCode($code): void
+    public function setCode($code)
     {
         $this->code = $code;
     }

@@ -74,6 +74,12 @@ class Reservation extends BaseController
         $this->view('public/customer/reservation.php');
     }
 
+    public function loadReservationsListView()
+    {
+        $reservations = $this->reservationRepository->getAllReservations();
+        $this->view('public/barber/reservations-list.php', ['reservations' => $reservations]);
+    }
+
     private function addSuccessReservationCookie(ReservationModel $reservation)
     {
         setcookie("reservation-cookie", $reservation->getCode(), time() + 3600);

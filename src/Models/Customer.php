@@ -28,7 +28,7 @@ class Customer
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -44,7 +44,7 @@ class Customer
     /**
      * @param mixed $firstName
      */
-    public function setFirstName($firstName): void
+    public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
     }
@@ -60,7 +60,7 @@ class Customer
     /**
      * @param mixed $lastName
      */
-    public function setLastName($lastName): void
+    public function setLastName($lastName)
     {
         $this->lastName = $lastName;
     }
@@ -76,7 +76,7 @@ class Customer
     /**
      * @param mixed $timesVisited
      */
-    public function setTimesVisited($timesVisited): void
+    public function setTimesVisited($timesVisited)
     {
         $this->timesVisited = $timesVisited;
     }

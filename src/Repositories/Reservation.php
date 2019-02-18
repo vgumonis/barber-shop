@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 
+use App\Models\CustomerReservation;
 use App\Models\Reservation as ReservationModel;
 use App\Models\ReservationStatus;
 
@@ -74,5 +75,28 @@ class Reservation extends BaseDBRepository
         return $reservation->fromArray($result[0]);
     }
 
+    public function getAllReservations()
+    {
+        $query = $this->pdo->prepare(
+            "Select reservation.*,
+                           customer.id as customer_id,
+                           customer.first_name,
+                           customer.last_name,
+                           customer.times_visited
+                      from barber.reservation
+                      inner join barber.customer on reservation.user_id = customer.id"
+        );
 
+        $query->execute();
+        $results = $query->fetchAll();
+
+        if (count($results) == 0) {
+            return null;
+        }
+
+        $customerReservation = new CustomerReservation();
+
+        return $customerReservation->fromMultipleArrays($results);
+
+    }
 }
