@@ -3,6 +3,7 @@
 require 'vendor/autoload.php';
 
 $reservationController = new \App\Controllers\Reservation();
+$complainController = new \App\Controllers\ComplainController();
 
 switch ($_SERVER['REQUEST_URI']) {
     case '/customer/reservation' :
@@ -20,6 +21,12 @@ switch ($_SERVER['REQUEST_URI']) {
         break;
     case '/barber/reservations' :
         $reservationController->loadReservationsListView();
+        break;
+    case '/barber/complain-form?':
+        $complainController->getForm();
+        break;
+    case '/barber/complain/create' :
+        $complainController->createComplain($_POST);
         break;
     default :
         include ('public/404.html');
