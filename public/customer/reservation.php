@@ -12,20 +12,20 @@
 ?>
     <form action="/customer/reservation/create" method="POST">
         First name:<br>
-        <input type="text" name="first_name">
+        <input type="text" name="first_name" required>
         <br>
         Last name:<br>
-        <input type="text" name="last_name">
-        <input type="datetime-local" step= "900" name="datetime">
+        <input type="text" name="last_name" required>
+        <input type="datetime-local" step= "900" name="datetime" required>
         <br><br>
         <input type="submit" value="Submit">
     </form>
     <br>
     <form action="/customer/reservation/existing" method="POST">
         Code:<br>
-        <input type="text" name="code">
+        <input type="text" name="code" required>
         <br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Find reservation">
     </form>
 </body>
 </html>

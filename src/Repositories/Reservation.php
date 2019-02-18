@@ -99,4 +99,12 @@ class Reservation extends BaseDBRepository
         return $customerReservation->fromMultipleArrays($results);
 
     }
+
+    public function updateStatus($id,$status)
+    {
+        $query = $this->pdo->prepare("UPDATE barber.reservation SET status = :status WHERE id = :id");
+        $query->execute(['status' => $status, 'id' => $id]);
+    }
+
+
 }

@@ -12,6 +12,6 @@ namespace App\Models;
 class ReservationStatus
 {
     public const RESERVATION_STATUS_ACTIVE = 'ACTIVE';
-    public const RESERVATION_STATUS_CANCELED = 'CANCEL';
+    public const RESERVATION_STATUS_CANCELED = 'CANCELED';
     public const RESERVATION_STATUS_FINISHED = 'FINISHED';
 }

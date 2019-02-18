@@ -15,15 +15,18 @@ class BaseDBRepository
 
     protected $pdo;
 
-    protected $config = [
-        'host' => '127.0.0.1',
-        'db' => 'barber',
-        'user' => 'root',
-        'password' => 'elpaso'
-    ];
+//    protected $config = [
+//        'host' => '127.0.0.1',
+//        'db' => 'barber',
+//        'user' => 'root',
+//        'password' => 'elpaso'
+//    ];
+
+    protected $config;
 
     public function __construct()
     {
+        $this->setConfig();
         $pdoConnection = new DBConnection($this->config);
         $this->pdo = $pdoConnection->getConnection();
     }
@@ -32,5 +35,17 @@ class BaseDBRepository
     public function getPdo()
     {
         return $this->pdo;
+    }
+
+    private function setConfig()
+    {
+        $dbconfig = json_decode(file_get_contents(__DIR__."/../../dbConfig.json"), true);
+
+        $this->config = [
+            'host' => $dbconfig['host'],
+            'db' => $dbconfig['db'],
+            'user' => $dbconfig['user'],
+            'password' => $dbconfig['password']
+        ];
     }
 }

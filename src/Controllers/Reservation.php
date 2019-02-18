@@ -10,6 +10,7 @@ namespace App\Controllers;
 
 use App\Models\Customer;
 use App\Models\Reservation as ReservationModel;
+use App\Models\ReservationStatus;
 use App\Repositories\Customer as CustomerRepository;
 use App\Repositories\Reservation as ReservationRepository;
 
@@ -80,6 +81,18 @@ class Reservation extends BaseController
         $this->view('public/barber/reservations-list.php', ['reservations' => $reservations]);
     }
 
+    public function cancelReservation(array $params)
+    {
+        $this->reservationRepository->updateStatus($params['id'], ReservationStatus::RESERVATION_STATUS_CANCELED);
+        $this->cancelReservationCookie();
+        $this->view('public/customer/reservation.php', ['message' => 'Reservation canceled']);
+    }
+
+    private function cancelReservationCookie()
+    {
+        setcookie ("reservation-cookie", "", time()-3600);
+    }
+
     private function addSuccessReservationCookie(ReservationModel $reservation)
     {
         setcookie("reservation-cookie", $reservation->getCode(), time() + 3600);
@@ -99,5 +112,7 @@ class Reservation extends BaseController
 
         $this->view('public/customer/reservation.php', ['message' => 'No reservation found']);
     }
+
+
 
 }
