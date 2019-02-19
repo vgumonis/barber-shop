@@ -9,27 +9,30 @@
 <body>
 <?php
     if (isset($params['message'])) {
-        echo "<div class='message'>".$params['message']."</div>";
+        echo "<div class='badge badge-success message'>".$params['message']."</div>";
     }
 ?>
-    <form action="/customer/reservation/create" method="POST">
-        First name:<br>
-        <input type="text" name="first_name" required>
-        <br>
-        Last name:<br>
-        <input type="text" name="last_name" required>
-        <input type="datetime-local" step= "900" name="datetime"  required>
-        <br><br>
-        <input type="submit" value="Create">
+    <div class="form-group">
+    <form action="/customer/reservation/create" method="POST" >
+        <p>Make Reservation</p>
+        <label> First name:</label>
+        <input type="text" name="first_name"  class="form-control"required>
+        <label> Last name:</label>
+        <input type="text" name="last_name"  class="form-control" required>
+        <label> Date:</label>
+        <input type="datetime-local" step= "900" name="datetime"  class="form-control" required>
+        <input type="submit" value="Create" class="btn btn-primary">
     </form>
+    </div>
     <br>
+<div class="form-group">
     <form action="/customer/reservation/existing" method="POST">
-        Find Reservation
-        <br>Code:<br>
-        <input type="text" name="code" required>
-        <br>
-        <input type="submit" value="Find reservation">
+        <p>Find Reservation<p>
+        <label>Code:</label>
+        <input type="text" name="code" class="form-control" required>
+        <input type="submit" value="Find reservation" class="btn btn-primary">
     </form>
+    <div>
 
 <script src="../Scripts/script.js"></script>
 </body>

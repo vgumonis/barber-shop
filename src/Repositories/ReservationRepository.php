@@ -9,11 +9,11 @@
 namespace App\Repositories;
 
 
-use App\Models\CustomerReservation;
-use App\Models\Reservation as ReservationModel;
-use App\Models\ReservationStatus;
+use App\Models\CustomerReservationModel;
+use App\Models\ReservationModel;
+use App\Models\ReservationStatusModel;
 
-class Reservation extends BaseDBRepository
+class ReservationRepository extends BaseDBRepository
 {
 
     public function create(ReservationModel $reservation)
@@ -27,7 +27,7 @@ class Reservation extends BaseDBRepository
         $query->execute([
             ':user_id' => $reservation->getUserId(),
             ':dateTime' => $reservation->getDateTime(),
-            ':status' => ReservationStatus::RESERVATION_STATUS_ACTIVE,
+            ':status' => ReservationStatusModel::RESERVATION_STATUS_ACTIVE,
             ':code' => $reservation->getCode()
         ]);
 
@@ -42,7 +42,7 @@ class Reservation extends BaseDBRepository
             "Select * from barber.reservation where user_id = :userId and status = :status"
         );
 
-        $query->execute(['userId' => $id, ':status' => ReservationStatus::RESERVATION_STATUS_ACTIVE]);
+        $query->execute(['userId' => $id, ':status' => ReservationStatusModel::RESERVATION_STATUS_ACTIVE]);
 
         $result = $query->fetchAll();
 
@@ -62,7 +62,7 @@ class Reservation extends BaseDBRepository
             "Select * from barber.reservation where code = :code and status = :status"
         );
 
-        $query->execute(['code' => $code, ':status' => ReservationStatus::RESERVATION_STATUS_ACTIVE]);
+        $query->execute(['code' => $code, ':status' => ReservationStatusModel::RESERVATION_STATUS_ACTIVE]);
 
         $result = $query->fetchAll();
 
@@ -94,7 +94,7 @@ class Reservation extends BaseDBRepository
             return null;
         }
 
-        $customerReservation = new CustomerReservation();
+        $customerReservation = new CustomerReservationModel();
 
         return $customerReservation->fromMultipleArrays($results);
 
@@ -102,7 +102,7 @@ class Reservation extends BaseDBRepository
 
     public function updateStatus($id, $status)
     {
-        if ($status === ReservationStatus::RESERVATION_STATUS_FINISHED) {
+        if ($status === ReservationStatusModel::RESERVATION_STATUS_FINISHED) {
             $this->pdo->beginTransaction();
 
             try {
@@ -157,7 +157,7 @@ class Reservation extends BaseDBRepository
             return null;
         }
 
-        $customerReservation = new CustomerReservation();
+        $customerReservation = new CustomerReservationModel();
         return $customerReservation->fromMultipleArrays($results);
     }
 
@@ -179,7 +179,7 @@ class Reservation extends BaseDBRepository
             return null;
         }
 
-        $customerReservation = new CustomerReservation();
+        $customerReservation = new CustomerReservationModel();
         return $customerReservation->fromMultipleArrays($results);
     }
 
@@ -201,7 +201,7 @@ class Reservation extends BaseDBRepository
             return null;
         }
 
-        $customerReservation = new CustomerReservation();
+        $customerReservation = new CustomerReservationModel();
         return $customerReservation->fromMultipleArrays($results);
     }
 }

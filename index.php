@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 
-$reservationController = new \App\Controllers\Reservation();
+$reservationController = new \App\Controllers\ReservationController();
 $complainController = new \App\Controllers\ComplainController();
 
 switch ($_SERVER['REQUEST_URI']) {
@@ -24,10 +24,10 @@ switch ($_SERVER['REQUEST_URI']) {
     case '/barber/reservation/change-status' :
         $reservationController->changeStatus($_POST);
         break;
-    case   '/barber/reservation/get-by-date?query=today':
+    case   '/barber/reservation/get-by-date?date=today':
         $reservationController->getReservationsByDay($_GET);
         break;
-    case '/barber/reservation/get-by-date?query=tomorrow':
+    case '/barber/reservation/get-by-date?date=tomorrow':
         $reservationController->getReservationsByDay($_GET);
         break;
     case '/barber/reservation/get-by-date' :

@@ -9,7 +9,7 @@
 namespace App\Models;
 
 
-class ReservationStatus
+class ReservationStatusModel
 {
     public const RESERVATION_STATUS_ACTIVE = 'ACTIVE';
     public const RESERVATION_STATUS_CANCELED = 'CANCELED';

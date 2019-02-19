@@ -7,16 +7,16 @@
 </head>
 <body>
 
-
-<form action="/barber/complain/create" method="post">
-    Complaint:<br>
-    <input type="text"  name="complaint" id="complaint-input"  required>
-    <br>
-    Possible Solution<br>
-    <input type="text" name="solution" id="solution-input">
-    <br><br>
-    <input type="submit" value="Submit Complain">
+<div class="form-group">
+<form action="/barber/complain/create" method="POST">
+    <p>Please fill your complain and possible solution bellow</p>
+    <label>Complaint</label>
+    <input type="text"  name="complaint" id="complaint-input" class="form-control" required>
+    <label>Possible Solution</label>
+    <input type="text" name="solution"  class="form-control" id="solution-input">
+    <input type="submit" value="Submit Complain"  class="btn btn-primary">
 </form>
+</div>
 
 
 </body>

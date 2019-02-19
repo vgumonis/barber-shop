@@ -10,7 +10,7 @@ namespace App\Controllers;
 
 use App\Repositories\ComplainRepository;
 use App\Models\ComplainModel;
-use App\Controllers\Reservation;
+use App\Controllers\ReservationController;
 
 
 class ComplainController extends BaseController
@@ -22,7 +22,7 @@ class ComplainController extends BaseController
     public function __construct()
     {
         $this->complainRepository = new ComplainRepository();
-        $this->reservationController = new Reservation();
+        $this->reservationController = new ReservationController();
     }
 
     public function getForm()

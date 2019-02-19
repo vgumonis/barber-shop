@@ -9,7 +9,7 @@
 namespace App\Models;
 
 
-class Customer
+class CustomerModel
 {
     private $id;
     private $firstName;
@@ -63,7 +63,7 @@ class Customer
         $this->timesVisited = $timesVisited;
     }
 
-    public function fromArray(array $array) : Customer
+    public function fromArray(array $array) : CustomerModel
     {
         $this->setId($array['id']);
         $this->setFirstName($array['first_name']);

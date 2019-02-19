@@ -9,7 +9,7 @@
 namespace App\Models;
 
 
-class Reservation
+class ReservationModel
 {
 
     private $id;
@@ -77,7 +77,7 @@ class Reservation
     }
 
 
-    public function fromArray(array $array): Reservation
+    public function fromArray(array $array): ReservationModel
     {
         $this->setId($array['id']);
         $this->setUserId($array['user_id']);

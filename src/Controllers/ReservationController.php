@@ -8,13 +8,13 @@
 
 namespace App\Controllers;
 
-use App\Models\Customer;
-use App\Models\Reservation as ReservationModel;
-use App\Models\ReservationStatus;
-use App\Repositories\Customer as CustomerRepository;
-use App\Repositories\Reservation as ReservationRepository;
+use App\Models\CustomerModel;
+use App\Models\ReservationModel;
+use App\Models\ReservationStatusModel;
+use App\Repositories\CustomerRepository;
+use App\Repositories\ReservationRepository;
 
-class Reservation extends BaseController
+class ReservationController extends BaseController
 {
     private $reservationRepository;
     private $customerRepository;
@@ -27,7 +27,7 @@ class Reservation extends BaseController
 
     public function addReservationByCustomer(array $params)
     {
-        $customer = new Customer();
+        $customer = new CustomerModel();
         $customer->fromArray($params);
 
         $reservation = new ReservationModel();
@@ -63,7 +63,7 @@ class Reservation extends BaseController
 
     public function addReservationByBarber(array $params)
     {
-        $customer = new Customer();
+        $customer = new CustomerModel();
         $customer->fromArray($params);
 
         $reservation = new ReservationModel();
@@ -86,9 +86,9 @@ class Reservation extends BaseController
 
 //        $this->view('public/barber/reservation-list.php', [
 //            'reservation' => $newReservation->toArray(),
-//            'message' => 'Reservation successfully added!'
+//            'message' => 'ReservationController successfully added!'
 //        ]);
-        $this->loadReservationsListView('Reservation successfully added!');
+        $this->loadReservationsListView('ReservationController successfully added!');
 
     }
 
@@ -119,15 +119,15 @@ class Reservation extends BaseController
 
     public function cancelReservation(array $params)
     {
-        $this->reservationRepository->updateStatus($params['id'], ReservationStatus::RESERVATION_STATUS_CANCELED);
+        $this->reservationRepository->updateStatus($params['id'], ReservationStatusModel::RESERVATION_STATUS_CANCELED);
         $this->cancelReservationCookie();
-        $this->view('public/customer/reservation.php', ['message' => 'Reservation canceled']);
+        $this->view('public/customer/reservation.php', ['message' => 'ReservationController canceled']);
     }
 
     public function changeStatus(array $params)
     {
         $this->reservationRepository->updateStatus($params['id'], $params['status']);
-        $this->loadReservationsListView("Reservation status updated!");
+        $this->loadReservationsListView("ReservationController status updated!");
 
     }
 

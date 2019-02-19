@@ -9,7 +9,7 @@
 namespace App\Models;
 
 
-class CustomerReservation
+class CustomerReservationModel
 {
     private $id;
     private $userId;
@@ -128,7 +128,7 @@ class CustomerReservation
         $this->timesVisited = $timesVisited;
     }
 
-    public function fromArray(array $array) : CustomerReservation
+    public function fromArray(array $array) : CustomerReservationModel
     {
         $this->setId($array['id']);
         $this->setUserId($array['user_id']);
@@ -148,7 +148,7 @@ class CustomerReservation
     {
         $customersReservations = [];
         foreach ($array as $row) {
-            $customerReservation = new CustomerReservation();
+            $customerReservation = new CustomerReservationModel();
             $customersReservations[] = $customerReservation->fromArray($row);
         }
 

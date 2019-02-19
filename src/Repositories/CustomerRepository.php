@@ -8,9 +8,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Customer as CustomerModel;
+use App\Models\CustomerModel as CustomerModel;
 
-class Customer extends BaseDBRepository
+class CustomerRepository extends BaseDBRepository
 {
 
     public function create(CustomerModel $customer)
