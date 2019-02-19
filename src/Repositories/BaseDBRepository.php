@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vilius
- * Date: 19.2.17
- * Time: 21.27
- */
 
 namespace App\Repositories;
 
@@ -39,7 +33,7 @@ class BaseDBRepository
 
     private function setConfig()
     {
-        $dbconfig = json_decode(file_get_contents(__DIR__."/../../dbConfig.json"), true);
+        $dbconfig = json_decode(file_get_contents(__DIR__ . "/../../dbConfig.json"), true);
 
         $this->config = [
             'host' => $dbconfig['host'],

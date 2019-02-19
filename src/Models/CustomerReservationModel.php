@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vilius
- * Date: 19.2.18
- * Time: 01.55
- */
 
 namespace App\Models;
-
 
 class CustomerReservationModel
 {
@@ -170,3 +163,4 @@ class CustomerReservationModel
         ];
     }
 }
+

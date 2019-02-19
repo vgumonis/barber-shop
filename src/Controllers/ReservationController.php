@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vilius
- * Date: 19.2.17
- * Time: 20.18
- */
 
 namespace App\Controllers;
 
@@ -175,7 +169,5 @@ class ReservationController extends BaseController
         $this->view('public/barber/reservations-list.php',
             ['reservations' => $reservations, 'message' => "Reservations found for " . $firstName . " " . $lastName]);
     }
-
-
 }
 

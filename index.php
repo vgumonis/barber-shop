@@ -49,6 +49,6 @@ switch ($_SERVER['REQUEST_URI']) {
         $complainController->createComplain($_POST);
         break;
     default :
-        include ('public/404.html');
+        include('public/404.html');
         break;
 }

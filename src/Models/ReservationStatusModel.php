@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vilius
- * Date: 19.2.17
- * Time: 23.03
- */
 
 namespace App\Models;
-
 
 class ReservationStatusModel
 {

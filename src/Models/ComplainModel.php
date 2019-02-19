@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vilius
- * Date: 19.2.18
- * Time: 12.08
- */
 
 namespace App\Models;
-
 
 class ComplainModel
 {
@@ -83,6 +76,5 @@ class ComplainModel
             'date' => $this->getDate(),
         ];
     }
-
 
 }

@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vilius
- * Date: 19.2.17
- * Time: 21.37
- */
 
 namespace App\Repositories;
-
 
 use App\Models\CustomerReservationModel;
 use App\Models\ReservationModel;
@@ -129,7 +122,6 @@ class ReservationRepository extends BaseDBRepository
 
     public function getReservationsByDate($day)
     {
-
         $query = $this->pdo->prepare("Select reservation.*,
                            customer.id as customer_id,
                            customer.first_name,
@@ -205,3 +197,4 @@ class ReservationRepository extends BaseDBRepository
         return $customerReservation->fromMultipleArrays($results);
     }
 }
+

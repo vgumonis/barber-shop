@@ -15,7 +15,7 @@
 <body>
 <?php
 if (isset($params['message'])) {
-    echo "<div class='badge badge-success message'>".$params['message']."</div>";
+    echo "<div class='badge badge-success message'>" . $params['message'] . "</div><br>";
 }
 ?>
 <?php
@@ -26,58 +26,62 @@ if (isset($params['message'])) {
 
 <!--style="display: none;"-->
 
+<!--LOYALTY-->
 <form id="loyalty" action="/barber/reservation/get-by-loyalty" method="GET">
     <input type="hidden" name="loyalty" value="max">
     <input type="submit" value="Get Reservations By Loyalty" class="btn btn-primary">
 </form>
-
+<!--TODAY-->
 <form id="today" action="/barber/reservation/get-by-date" method="GET">
     <input type="hidden" name="date" value="today">
     <input type="submit" value="Get Todays Reservations" class="btn btn-primary">
 </form>
 
-
+<!--TOMORROW-->
 <form id="tomorrow" action="/barber/reservation/get-by-date" method="GET">
     <input type="hidden" name="date" value="tomorrow">
     <input type="submit" value="Get Tomorrows Reservations" class="btn btn-primary">
 </form>
 
+<!--SEARCH BY NAME-->
 <p id="search-by-name-p">Search By Name</p>
-<div class="form-group">
-<form id="search-by-name" action="/barber/reservation/search-by-name" method="POST"">
+<div class="form-group" id="search-by-name">
+    <form  action="/barber/reservation/search-by-name" method="POST"
+    ">
     <label>First name:</label>
-    <input type=" text" name="first_name"  class="form-control"required>
-<label>Last name:</label>
-<input type="text" name="last_name" class="form-control" required>
-<input type="submit" value="Find" class="btn btn-primary">
-</form>
-</div>
-
-<p id="search-by-date-p">Search By Date</p>
-<div class="form-group">
-<form id="search-by-date" action="/barber/reservation/get-by-date" method="POST" >
-    <label>Enter date</label>
-    <input type="date" name="date" class="form-control" required>
-    <input type="submit" value="Find" class="btn btn-primary">
-</form>
-</div>
-
-
-<p id="create-new-p">Create New</p>
-<div class="form-group">
-<form id="create-new" action="/barber/reservation/create" method="POST" ">
-    <label>First name:</label>
-    <input type="text" name="first_name" class="form-control"required>
+    <input type=" text" name="first_name" class="form-control" required>
     <label>Last name:</label>
-    <input type="text" name="last_name" class="form-control"required>
-    <label>Date:</label>
-    <input type="datetime-local" step="900" name="datetime" class="form-control"required>
-    <input type="submit" value="Create" class="btn btn-primary">
-</form>
+    <input type="text" name="last_name" class="form-control" required>
+    <input type="submit" value="Find" class="btn btn-primary">
+    </form>
 </div>
 
-<!--class="table table-striped"-->
-<table  class="table">
+<!--SEARCH BY DATE-->
+<p id="search-by-date-p">Search By Date</p>
+<div class="form-group" id="search-by-date">
+    <form  action="/barber/reservation/get-by-date" method="POST">
+        <label>Enter date</label>
+        <input type="date" name="date" class="form-control" required>
+        <input type="submit" value="Find" class="btn btn-primary">
+    </form>
+</div>
+
+<!--CREATE NEW-->
+<p id="create-new-p">Create New</p>
+<div class="form-group" id="create-new">
+    <form action="/barber/reservation/create" method="POST"
+    ">
+    <label>First name:</label>
+    <input type="text" name="first_name" class="form-control" required>
+    <label>Last name:</label>
+    <input type="text" name="last_name" class="form-control" required>
+    <label>Date:</label>
+    <input type="datetime-local" step="900" name="datetime" class="form-control" required>
+    <input type="submit" value="Create" class="btn btn-primary">
+    </form>
+</div>
+
+<table class="table">
     <thead>
     <tr>
         <th>ID</th>
@@ -114,16 +118,16 @@ if (isset($params['message'])) {
                 <form action="/barber/reservation/change-status" method="POST">
                     <input type="hidden" name="id" value="<?php echo $reservationData['id'] ?>">
                     <div class="dropdown">
-                    <select name="status" class="btn btn-info dropdown-toggle">
-                        <option value="<?php echo $canceled ?>"<?php echo($reservationData['status'] != $canceled ?: "selected"); ?>>
-                            Canceled
-                        </option>
-                        <option value="<?php echo $finished ?>"<?php echo($reservationData['status'] != $finished ?: "selected"); ?>
-                        ">Finished</option>
-                        <option value="<?php echo $active ?>"<?php echo($reservationData['status'] != $active ?: "selected"); ?> >
-                            Active
-                        </option>
-                    </select>
+                        <select name="status" class="btn btn-info dropdown-toggle">
+                            <option value="<?php echo $canceled ?>"<?php echo($reservationData['status'] != $canceled ?: "selected"); ?>>
+                                Canceled
+                            </option>
+                            <option value="<?php echo $finished ?>"<?php echo($reservationData['status'] != $finished ?: "selected"); ?>
+                            ">Finished</option>
+                            <option value="<?php echo $active ?>"<?php echo($reservationData['status'] != $active ?: "selected"); ?> >
+                                Active
+                            </option>
+                        </select>
                     </div>
                     <input type="submit" value="Change" class="btn btn-warning">
                 </form>
@@ -134,12 +138,11 @@ if (isset($params['message'])) {
 </table>
 
 <div class="form-group">
-<form action="/barber/complain-form" method="get">
-    <label>Got a complaint ?</label><br>
-    <input type="submit" value="Submit Complain" class="btn btn-primary"/>
-</form>
+    <form action="/barber/complain-form" method="get">
+        <label>Got a complaint ?</label><br>
+        <input type="submit" value="Submit Complain" class="btn btn-primary"/>
+    </form>
     <div>
-
-<script type="text/javascript" src="../Scripts/script.js"></script>
+        <script type="text/javascript" src="../Scripts/script.js"></script>
 </body>
 </html>

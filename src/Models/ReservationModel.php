@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vilius
- * Date: 19.2.17
- * Time: 21.05
- */
+
 
 namespace App\Models;
-
 
 class ReservationModel
 {
@@ -99,5 +93,5 @@ class ReservationModel
         ];
     }
 
-
 }
+
