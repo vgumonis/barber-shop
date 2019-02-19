@@ -77,7 +77,7 @@ class ReservationRepository extends BaseDBRepository
                            customer.last_name,
                            customer.times_visited
                       from reservation
-                      inner join barber.customer on reservation.user_id = customer.id"
+                      inner join customer on reservation.user_id = customer.id"
         );
 
         $query->execute();
@@ -128,7 +128,7 @@ class ReservationRepository extends BaseDBRepository
                            customer.last_name,
                            customer.times_visited
                       from reservation
-                      inner join barber.customer on reservation.user_id = customer.id WHERE cast(datetime as Date) = :date "
+                      inner join customer on reservation.user_id = customer.id WHERE cast(datetime as Date) = :date "
         );
 
         switch ($day) {
@@ -161,7 +161,7 @@ class ReservationRepository extends BaseDBRepository
                            customer.last_name,
                            customer.times_visited
                       from reservation
-                      inner join barber.customer on reservation.user_id = customer.id WHERE  first_name = :firstName and last_name = :lastName"
+                      inner join customer on reservation.user_id = customer.id WHERE  first_name = :firstName and last_name = :lastName"
         );
 
         $query->execute([':firstName' => $firstName, ':lastName' => $lastName]);
@@ -183,7 +183,7 @@ class ReservationRepository extends BaseDBRepository
                            customer.last_name,
                            customer.times_visited
                       from reservation
-                      inner join barber.customer on reservation.user_id = customer.id ORDER BY times_visited DESC"
+                      inner join customer on reservation.user_id = customer.id ORDER BY times_visited DESC"
         );
 
         $query->execute();

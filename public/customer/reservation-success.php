@@ -19,7 +19,7 @@ if (isset($params['message'])) {
     echo 'Your reservation at : ' . $reservation['datetime'] . ' .Your request number is : ' . $reservation['code'];
     echo '<form action="/customer/reservation/cancel" method="POST">';
     echo '<input type="hidden" name="id" value="' . $reservation['id'] . '">';
-    echo '<input type="submit" value="Cancel ReservationController" class="btn btn-danger">';
+    echo '<input type="submit" value="Cancel Reservation" class="btn btn-danger">';
     echo '</form>';
 }
 ?>
