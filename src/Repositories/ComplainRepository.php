@@ -13,6 +13,11 @@ class ComplainRepository extends BaseDBRepository
             ':complaint' => $complain->getComplaint(),
             ':solution' => $complain->getSolution(),
         ]);
+
+        $complain->setId($this->pdo->lastInsertId());
+        return $complain;
+        
+
     }
 }
 

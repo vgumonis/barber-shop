@@ -18,13 +18,6 @@ if (isset($params['message'])) {
     echo "<div class='badge badge-success message'>" . $params['message'] . "</div><br>";
 }
 ?>
-<?php
-//echo '<pre>';
-//print_r($params['reservations']);
-//echo '</pre>';
-?>
-
-<!--style="display: none;"-->
 
 <!--LOYALTY-->
 <form id="loyalty" action="/barber/reservation/get-by-loyalty" method="GET">
@@ -44,10 +37,9 @@ if (isset($params['message'])) {
 </form>
 
 <!--SEARCH BY NAME-->
-<p id="search-by-name-p">Search By Name</p>
 <div class="form-group" id="search-by-name">
-    <form  action="/barber/reservation/search-by-name" method="POST"
-    ">
+    <form  action="/barber/reservation/search-by-name" method="POST">
+        <p id="search-by-name-p">Search By Name</p>
     <label>First name:</label>
     <input type=" text" name="first_name" class="form-control" required>
     <label>Last name:</label>
@@ -57,9 +49,9 @@ if (isset($params['message'])) {
 </div>
 
 <!--SEARCH BY DATE-->
-<p id="search-by-date-p">Search By Date</p>
 <div class="form-group" id="search-by-date">
-    <form  action="/barber/reservation/get-by-date" method="POST">
+    <p id="search-by-date-p">Search By Date</p>
+    <form  action="/barber/reservation/get-by-date" method="GET">
         <label>Enter date</label>
         <input type="date" name="date" class="form-control" required>
         <input type="submit" value="Find" class="btn btn-primary">
@@ -67,10 +59,9 @@ if (isset($params['message'])) {
 </div>
 
 <!--CREATE NEW-->
-<p id="create-new-p">Create New</p>
 <div class="form-group" id="create-new">
-    <form action="/barber/reservation/create" method="POST"
-    ">
+    <form action="/barber/reservation/create" method="POST">
+    <p id="create-new-p">Create New</p>
     <label>First name:</label>
     <input type="text" name="first_name" class="form-control" required>
     <label>Last name:</label>

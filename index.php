@@ -5,8 +5,10 @@ require 'vendor/autoload.php';
 $reservationController = new \App\Controllers\ReservationController();
 $complainController = new \App\Controllers\ComplainController();
 
-switch ($_SERVER['REQUEST_URI']) {
-    case '/customer/reservation' :
+//print_r(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+
+switch (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+    case '/barber-shop/customer/reservation' :
         $reservationController->loadCustomerReservationView();
         break;
     case '/customer/reservation/create' :
@@ -24,14 +26,8 @@ switch ($_SERVER['REQUEST_URI']) {
     case '/barber/reservation/change-status' :
         $reservationController->changeStatus($_POST);
         break;
-    case   '/barber/reservation/get-by-date?date=today':
+    case   '/barber/reservation/get-by-date':
         $reservationController->getReservationsByDay($_GET);
-        break;
-    case '/barber/reservation/get-by-date?date=tomorrow':
-        $reservationController->getReservationsByDay($_GET);
-        break;
-    case '/barber/reservation/get-by-date' :
-        $reservationController->getReservationsByDay($_POST);
         break;
     case '/barber/reservation/create' :
         $reservationController->addReservationByBarber($_POST);
@@ -39,10 +35,10 @@ switch ($_SERVER['REQUEST_URI']) {
     case  '/barber/reservation/search-by-name' :
         $reservationController->getExistingCustomersReservations($_POST);
         break;
-    case '/barber/reservation/get-by-loyalty?loyalty=max':
+    case '/barber/reservation/get-by-loyalty':
         $reservationController->finReservationsByLoyalty();
         break;
-    case '/barber/complain-form?':
+    case '/barber/complain-form':
         $complainController->getForm();
         break;
     case '/barber/complain/create' :

@@ -13,7 +13,7 @@ if (isset($params['message'])) {
     echo "<div class='badge badge-success message'>" . $params['message'] . "</div><br>";
 }
 ?>
-<div class="form-group" id="reservation-form">
+<div class="form-group"  id="reservation-form">
     <form action="/customer/reservation/create" method="POST">
         <p>Make Reservation</p>
         <label> First name:</label>
@@ -31,10 +31,9 @@ if (isset($params['message'])) {
         <p>Find Reservation</p>
             <label>Code:</label>
             <input type="text" name="code" class="form-control" required>
-            <input type="submit" value="Find reservation" class="btn btn-primary">
+            <input type="submit" value="Find reservation" class="btn btn-primary" >
+            <button></button>
     </form>
-    <div>
-
-        <script src="../Scripts/script.js"></script>
+    <div>   
 </body>
 </html>

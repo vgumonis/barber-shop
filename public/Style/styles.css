@@ -1,6 +1,19 @@
-@charset "UTF-8";
-.discount {
-    font-size: 15pt;
-    font-style: italic;
-    colour: red;
+.form-control{
+    width: 500px;
+    padding: 10px;
+    border: 2px solid grey;
+    border-radius: 9px;
+    margin: 5px;
+}
+
+.btn-primary {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.btn-warning{
+    margin-top: 5px;
+}
+.badge {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
