@@ -32,7 +32,7 @@ class ReservationRepository extends BaseDBRepository
     public function findActiveReservationByCustomerId($id)
     {
         $query = $this->pdo->prepare(
-            "Select * from barber.reservation where user_id = :userId and status = :status"
+            "Select * from reservation where user_id = :userId and status = :status"
         );
 
         $query->execute(['userId' => $id, ':status' => ReservationStatusModel::RESERVATION_STATUS_ACTIVE]);
@@ -52,7 +52,7 @@ class ReservationRepository extends BaseDBRepository
     public function findActiveReservationByCode($code)
     {
         $query = $this->pdo->prepare(
-            "Select * from barber.reservation where code = :code and status = :status"
+            "Select * from reservation where code = :code and status = :status"
         );
 
         $query->execute(['code' => $code, ':status' => ReservationStatusModel::RESERVATION_STATUS_ACTIVE]);
@@ -76,7 +76,7 @@ class ReservationRepository extends BaseDBRepository
                            customer.first_name,
                            customer.last_name,
                            customer.times_visited
-                      from barber.reservation
+                      from reservation
                       inner join barber.customer on reservation.user_id = customer.id"
         );
 
@@ -127,7 +127,7 @@ class ReservationRepository extends BaseDBRepository
                            customer.first_name,
                            customer.last_name,
                            customer.times_visited
-                      from barber.reservation
+                      from reservation
                       inner join barber.customer on reservation.user_id = customer.id WHERE cast(datetime as Date) = :date "
         );
 
@@ -160,7 +160,7 @@ class ReservationRepository extends BaseDBRepository
                            customer.first_name,
                            customer.last_name,
                            customer.times_visited
-                      from barber.reservation
+                      from reservation
                       inner join barber.customer on reservation.user_id = customer.id WHERE  first_name = :firstName and last_name = :lastName"
         );
 
@@ -182,7 +182,7 @@ class ReservationRepository extends BaseDBRepository
                            customer.first_name,
                            customer.last_name,
                            customer.times_visited
-                      from barber.reservation
+                      from reservation
                       inner join barber.customer on reservation.user_id = customer.id ORDER BY times_visited DESC"
         );
 

@@ -24,7 +24,7 @@ class CustomerRepository extends BaseDBRepository
     public function findByName(CustomerModel $customer)
     {
         $query = $this->pdo->prepare(
-            "Select * from barber.customer where first_name = :name and last_name = :lastName"
+            "Select * from customer where first_name = :name and last_name = :lastName"
         );
         $query->bindParam(':name', $customer->getFirstName());
         $query->bindParam(':lastName', $customer->getLastName());
