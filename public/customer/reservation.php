@@ -32,7 +32,6 @@ if (isset($params['message'])) {
             <label>Code:</label>
             <input type="text" name="code" class="form-control" required>
             <input type="submit" value="Find reservation" class="btn btn-primary" >
-            <button></button>
     </form>
     <div>   
 </body>
