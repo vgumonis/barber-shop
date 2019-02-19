@@ -2,7 +2,9 @@
 
 **Barber Shop** is designed with two users in mind *customer* and *barber*
 
-**Database instalation**
+**Instalation**
+
+After git clone run *Composer install*.
 
 Database configurations **must** bet entered in the *dbConfig.json* file. Or can be harcoded in *BaseDBRespository* class.
 

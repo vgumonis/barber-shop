@@ -5,10 +5,8 @@ require 'vendor/autoload.php';
 $reservationController = new \App\Controllers\ReservationController();
 $complainController = new \App\Controllers\ComplainController();
 
-//print_r(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-
 switch (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
-    case '/barber-shop/customer/reservation' :
+    case '/customer/reservation' :
         $reservationController->loadCustomerReservationView();
         break;
     case '/customer/reservation/create' :
