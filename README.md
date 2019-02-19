@@ -11,7 +11,7 @@ Database with tables can be created by running the *db-schema.sql* file.
 Database can be populated by running the *db-populate.sql* file.
 
 
-###Customer
+### Customer
 
 To access *Customer* features please go to **/customer/reservation** eg. *http://localhost:8080/customer/reservation*.
 
@@ -22,7 +22,7 @@ One user can have only one reservation.
 Reservation time can be found out by searching with the unique code.  
 
 
-###Barber
+### Barber
 
 To access *Barber* features go to **/barber/reservation** eg. *http://localhost:8080/barber/reservation*.
 
