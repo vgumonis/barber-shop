@@ -35,7 +35,7 @@ class ReservationController extends BaseController
             $activeReservation = $this->reservationRepository->findActiveReservationByCustomerId($existing->getId());
             if ($activeReservation !== null) {
                 $this->view('public/customer/reservation.php', [
-                    'message' => 'You already have a reservation' // show date and code
+                    'message' => 'Time slot not available' // show date and code
                 ]);
 
                 return;
