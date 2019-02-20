@@ -1,5 +1,4 @@
 <?php
-
 require 'vendor/autoload.php';
 
 $reservationController = new \App\Controllers\ReservationController();

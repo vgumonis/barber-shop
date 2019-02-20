@@ -22,18 +22,18 @@ if (isset($params['message'])) {
 <!--LOYALTY-->
 <form id="loyalty" action="/barber/reservation/get-by-loyalty" method="GET">
     <input type="hidden" name="loyalty" value="max">
-    <input type="submit" value="Get Reservations By Loyalty" class="btn btn-primary">
+    <input type="submit" value="Get Reservations By Loyalty" class="btn btn-info">
 </form>
 <!--TODAY-->
 <form id="today" action="/barber/reservation/get-by-date" method="GET">
     <input type="hidden" name="date" value="today">
-    <input type="submit" value="Get Todays Reservations" class="btn btn-primary">
+    <input type="submit" value="Get Todays Reservations" class="btn btn-info">
 </form>
 
 <!--TOMORROW-->
 <form id="tomorrow" action="/barber/reservation/get-by-date" method="GET">
     <input type="hidden" name="date" value="tomorrow">
-    <input type="submit" value="Get Tomorrows Reservations" class="btn btn-primary">
+    <input type="submit" value="Get Tomorrows Reservations" class="btn btn-info">
 </form>
 
 <!--SEARCH BY NAME-->
@@ -128,7 +128,7 @@ if (isset($params['message'])) {
     </tbody>
 </table>
 
-<div class="form-group">
+<div class="form-group" id="complain-link">
     <form action="/barber/complain-form" method="get">
         <label>Got a complaint ?</label><br>
         <input type="submit" value="Submit Complain" class="btn btn-primary"/>
